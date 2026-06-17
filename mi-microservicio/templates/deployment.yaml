@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-inventario
+  labels:
+    app: {{ .Release.Name }}-inventario
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-inventario
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-inventario
+    spec:
+      containers:
+        - name: inventario-app
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          # Inyección de variables de entorno para demostrar configuración dinámica
+          env:
+            - name: NODE_ENV
+              value: {{ .Values.environment | quote }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          # Mantenibilidad y Resiliencia: Monitoreo de salud usando el endpoint de la Fase 1
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 10

@@ -1,0 +1,12 @@
+# Sobreescritura de valores para ambiente de producción
+replicaCount: 3  # Escalabilidad: Más réplicas para soportar alta carga
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+environment: "production"
