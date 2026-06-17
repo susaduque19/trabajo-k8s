@@ -1,0 +1,9 @@
+# Ignorar instaladores y ejecutables pesados
+minikube-linux-amd64
+kubectl
+.kube/
+.minikube/
+
+# Ignorar node_modules locales si existen
+node_modules/
+.DS_Store

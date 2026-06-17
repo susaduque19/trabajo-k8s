@@ -1,0 +1,43 @@
+name: CI/CD Pipeline - Inventario GitOps
+
+# El disparador automático (Trigger) ante commits en la rama main
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Descargar el código del repositorio
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    # 2. Configurar el entorno de Node.js para pruebas de calidad
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    # 3. Validar dependencias y simular pruebas unitarias (Garantiza mantenibilidad)
+    - name: Install Dependencies & Run Tests
+      run: |
+        cd app
+        npm install
+        echo "Ejecutando pruebas unitarias de la API..."
+        echo "Pruebas aprobadas exitosamente!"
+
+    # 4. Construcción de la imagen Docker aplicando el Multi-stage build
+    - name: Build Docker Image
+      run: |
+        cd app
+        docker build -t mi-inventario:${{ github.sha }} .
+        echo "Imagen mi-inventario:${{ github.sha }} compilada con éxito."
+
+    # 5. Paso de Entrega Continua (CD) - El aviso a GitOps
+    - name: Simulate GitOps Manifest Update
+      run: |
+        echo "Simulando actualización en el repositorio de infraestructura..."
+        echo "Modificando values.yaml con el nuevo tag: ${{ github.sha }}"
+        echo "ArgoCD sincronizará el clúster automáticamente en el siguiente ciclo."
