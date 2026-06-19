@@ -4,7 +4,7 @@ replicaCount: 1
 image:
   repository: mi-inventario
   tag: "v1"
-  pullPolicy: always
+  pullPolicy: Always
 
 service:
   type: ClusterIP
