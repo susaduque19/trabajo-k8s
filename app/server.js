@@ -7,7 +7,7 @@ app.use(express.json());
 // Endpoint de negocio
 app.get('/api/products', (req, res) => {
     res.json([
-        { id: 1, name: "Teclado Mecánico", stock: 15 },
+        { id: 1, name: "Teclado", stock: 15 },
         { id: 2, name: "Monitor 4K", stock: 8 },
         { id: 3, name: "Mouse Inalámbrico", stock: 22 }
     ]);

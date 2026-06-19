@@ -5,5 +5,5 @@ kubectl
 .minikube/
 
 # Ignorar node_modules locales si existen
-node_modules/
+.app/node_modules/
 .DS_Store
