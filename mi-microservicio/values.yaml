@@ -4,7 +4,7 @@ replicaCount: 1
 image:
   repository: mi-inventario
   tag: "v1"
-  pullPolicy: IfNotPresent
+  pullPolicy: always
 
 service:
   type: ClusterIP
@@ -18,5 +18,4 @@ resources:
     cpu: 100m
     memory: 128Mi
 
-# Esto servirá más adelante para simular entornos
 environment: "development"
