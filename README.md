@@ -32,12 +32,12 @@ El despliegue de la aplicación está compuesto por las siguientes capas lógica
 
 ---
 
-## 📊 Estado del Ciclo de Vida y Reconciliación
+##  Estado del Ciclo de Vida y Reconciliación
 
 Durante la actividad, se evaluó cómo reacciona el ciclo de vida de GitOps ante intervenciones manuales en el clúster:
 
 1. **Estado Sincronizado (`Synced` & `Healthy`):** En condiciones normales, el estado declarado en Git coincide con el estado físico en Kubernetes.
-2. **Detección de Desviaciones (`OutOfSync` / Estado Fantasma 👻):** Al ejecutar comandos destructivos directos como:
+2. **Detección de Desviaciones (`OutOfSync` / Estado Fantasma):** Al ejecutar comandos destructivos directos como:
    ```bash
    kubectl delete svc inventario-app-inventario-service
     ```
@@ -49,7 +49,7 @@ Sincronización Manual: Restauración inmediata del servicio mediante la interfa
 
 Sincronización Automática (Self-Heal): Configuración opcional en la política de sincronización (Sync Policy) para delegar en Argo CD la recreación inmediata y automática ante cualquier alteración manual no autorizada en el clúster.
 
-🛠️ Tecnologías Utilizadas
+ Tecnologías Utilizadas
 Kubernetes: Motor de orquestación de contenedores.
 
 Argo CD: Herramienta de entrega continua declarativa para GitOps.
